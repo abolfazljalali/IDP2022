@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            .row {
+                display: flex;
+            }
+
+            .column {
+                flex: 33.33%;
+                padding: 5px;
+            }
+            img {
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            {% for image in images %}
+                <div class="column">
+                    <p style="font-size: 15px;">{{image.name}}</p>
+                    <img class="img-relative" src="{{image.img}}"/>
+                    {% for tag in image.tags %}
+                        <p>{{tag}}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
