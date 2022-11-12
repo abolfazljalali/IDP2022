@@ -91,13 +91,13 @@ venv.bak/
 
 
 # My addings
-bin/
-include/
-lib/
-share/
+bin/*
+include/*
+lib/*
+share/*
 pyvenv.cfg
-src/idp_web/frontal/__pycache__/
-src/idp_web/idp_web/__pycache__/
+src/idp_web/frontal/__pycache__/*
+src/idp_web/idp_web/__pycache__/*
 
 # Spyder project settings
 .spyderproject
