@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+LOCAL_FILE_DIR = 'inventory/'
+IMAGE_FILE_DIR = 'images'
 # Application definition
 
 INSTALLED_APPS = [
