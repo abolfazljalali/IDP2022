@@ -89,6 +89,8 @@ ENV/
 env.bak/
 venv.bak/
 
+salam
+
 
 # My addings
 bin/
@@ -105,7 +107,7 @@ src/idp_web/idp_web/__pycache__/
 
 # Rope project settings
 .ropeproject
-
+§
 # mkdocs documentation
 /site
 
