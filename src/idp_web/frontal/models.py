@@ -97,3 +97,8 @@ class SegmentTag(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     value = models.CharField('Value', max_length=4096)
 
+
+class ErrorResponse(models.Model):
+    class Meta:
+        managed = False
+    error_message = models.TextField('Error Message')

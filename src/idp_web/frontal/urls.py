@@ -3,6 +3,7 @@ from . import views
 
 app_name = 'frontal'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('image/<str:directory_path>/<str:file_name>/<int:file_type>', views.image_insert, name='image_insert'),
+    path('', views.image_list, name='image_list'),
+    path('image/<int:image_id>/', views.image_by_id, name='image_by_id'),
+    path('image/tag/<int:tag_id>/', views.image_by_tag, name='image_by_tag'),
 ]

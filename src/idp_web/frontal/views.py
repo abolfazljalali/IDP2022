@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
+from django.core import serializers
 
 from PIL import Image
 import base64
@@ -9,32 +10,64 @@ from io import BytesIO
 
 from . import models
 
-def index(request):
-    # images = models.Image.objects.all().values()
-    # def to_data_uri(pil_img):
-    #     data = BytesIO()
-    #     pil_img.save(data, "JPEG") # pick your format
-    #     data64 = base64.b64encode(data.getvalue())
-    #     return u'data:img/jpeg;base64,'+data64.decode('utf-8')
-    # rendered_images = []
-    # for image in images:
-    #     tags = []
-    #     try:
-    #         for tag in models.ImageTag.objects.filter(image=image['id']):
-    #             tags.append(tag)
-    #     except Exception as e:
-    #         print(e)    
-    #     rendered_images.append(
-    #         {'name': image['file_name'],'img': to_data_uri(Image.open(f"{image['directory_path']}/{image['file_name']}")), 'tags': tags}
-    #         )
+
+def image_list(request):
+    '''
+    Returns the list of all images available in the dataset.
+
+            Parameters:
+                    None
+
+            Returns:
+                    Model (Image): A serialized dict/json of the Image Model.
+    '''
+    try:
+        retrived_image = models.Image.objects.all()
+        response_data = serializers.serialize('json', retrived_image)
+    except models.Image.DoesNotExist:
+        errorResponse = models.ErrorResponse()
+        errorResponse.error_message = f'No data exists.'
+        response_data = serializers.serialize('json', [errorResponse])
+    return HttpResponse(response_data, content_type='application/json')
 
 
-    # index_template = loader.get_template('frontal/index.html')
-    # context = {
-    #     'images': rendered_images,
-    # }
-    return HttpResponse('You called index.')
+def image_by_id(request, image_id):
+    '''
+    Returns the image corresponding to the primary key.
 
-def image_insert(request, directory_path, file_name, file_type):
+            Parameters:
+                    image_id (int): A positive integer
 
-    return HttpResponse(f'You called image_insert {directory_path, file_name, file_type}')
+            Returns:
+                    Model (Image): A serialized dict/json of the Image Model.
+    '''
+    try:
+        retrived_image = models.Image.objects.get(pk=image_id)
+        response_data = serializers.serialize('json', [retrived_image])
+    except models.Image.DoesNotExist:
+        errorResponse = models.ErrorResponse()
+        errorResponse.error_message = f'The image with image_id:{image_id} does not exist.'
+        response_data = serializers.serialize('json', [errorResponse])
+    return HttpResponse(response_data, content_type='application/json')
+
+def image_by_tag(request, tag_id):
+    '''
+    Returns the images that relate to the tag id.
+
+            Parameters:
+                    tag_id (int): A positive integer
+
+            Returns:
+                    Model (Image): A serialized dict/json of the Image Model.
+    '''
+    try:
+        retrived_image = models.ImageTag.objects.filter(tag_id=tag_id)
+        retrived_image = [models.Image.objects.get(pk=image_id.id) for image_id in retrived_image]
+        response_data = serializers.serialize('json', retrived_image)
+    except models.Image.DoesNotExist:
+        errorResponse = models.ErrorResponse()
+        errorResponse.error_message = f'The images with tag_id:{tag_id} does not exist.'
+        response_data = serializers.serialize('json', [errorResponse])
+    return HttpResponse(response_data, content_type='application/json')
+
+
