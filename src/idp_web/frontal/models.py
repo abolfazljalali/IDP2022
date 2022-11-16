@@ -40,6 +40,9 @@ class Mask(models.Model):
     directory_path = models.CharField('Directory Path', max_length=2048)
     file_name = models.CharField('File Name', max_length=2048)
     file_type = models.IntegerField()
+    
+    def __str__(self) -> str:
+        return self.file_name
 
 
 class Tag(models.Model):
@@ -83,13 +86,16 @@ class ImageMask(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     mask = models.ForeignKey(Mask, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return f'{self.mask.file_name} -> {self.image.file_name}'
+
 
 class ImageTag(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     value = models.CharField('Value', max_length=4096)
     def __str__(self) -> str:
-        return f'{self.tag.name}:{self.value}'
+        return f'[{self.image.file_name}] {self.tag.name}:{self.value}'
 
 
 class SegmentTag(models.Model):

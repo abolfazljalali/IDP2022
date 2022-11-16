@@ -1,9 +1,16 @@
 from django.urls import path
-from . import views
+from .views import image
+from .views import mask
 
 app_name = 'frontal'
 urlpatterns = [
-    path('', views.image_list, name='image_list'),
-    path('image/<int:image_id>/', views.image_by_id, name='image_by_id'),
-    path('image/tag/<int:tag_id>/', views.image_by_tag, name='image_by_tag'),
+    # Image Model Routing
+    path('image/', image.image_list, name='image_list'),
+    path('image/<int:image_id>/', image.image_by_id, name='image_by_id'),
+    path('image/tag/<int:tag_id>/', image.image_by_tag, name='image_by_tag'),
+
+    # Mask Model Routing
+    path('mask/', mask.mask_list, name='mask_list'),
+    path('mask/<int:mask_id>/', mask.mask_by_id, name='mask_by_id'),
+    path('mask/image/<int:image_id>/', mask.mask_by_image_id, name='mask_by_image_id'),
 ]
