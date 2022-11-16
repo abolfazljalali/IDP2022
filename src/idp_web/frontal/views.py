@@ -9,7 +9,6 @@ from io import BytesIO
 
 from . import models
 
-# Create your views here.
 def index(request):
     images = models.Image.objects.all().values()
     def to_data_uri(pil_img):

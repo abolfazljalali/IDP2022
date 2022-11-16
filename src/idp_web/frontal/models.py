@@ -1,7 +1,23 @@
+# -*- coding: utf-8 -*-
+"""Database Model Module 
+
+Notice the comment above the docstring specifying the encoding.
+Docstrings do appear in the bytecode, so you can access this through
+the ``__doc__`` attribute. This is also what you'll see if you call
+help() on a module or any other Python object.
+"""
+
 from django.db import models
 
 
 class Image(models.Model):
+    """Image Model 
+
+    Notice the comment above the docstring specifying the encoding.
+    Docstrings do appear in the bytecode, so you can access this through
+    the ``__doc__`` attribute. This is also what you'll see if you call
+    help() on a module or any other Python object.
+    """
     directory_path = models.CharField('Directory Path', max_length=2048)
     file_name = models.CharField('File Name', max_length=2048)
     file_type = models.IntegerField()
