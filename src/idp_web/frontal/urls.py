@@ -8,6 +8,7 @@ urlpatterns = [
     path('image/', image.image_list, name='image_list'),
     path('image/<int:image_id>/', image.image_by_id, name='image_by_id'),
     path('image/tag/<int:tag_id>/', image.image_by_tag, name='image_by_tag'),
+    path('image/insert', image.image_insert, name='image_insert'),
 
     # Mask Model Routing
     path('mask/', mask.mask_list, name='mask_list'),

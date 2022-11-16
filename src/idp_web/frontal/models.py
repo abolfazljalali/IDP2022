@@ -76,6 +76,7 @@ class Tag(models.Model):
 
 
 class Annotation(models.Model):
+
     class Meta:
         verbose_name = "Annotation"
         verbose_name_plural = "Annotations"
@@ -85,26 +86,32 @@ class Annotation(models.Model):
     
 
 class Color(models.Model):
+
     class Meta:
         verbose_name = "Color"
         verbose_name_plural = "Colors"
+
     name = models.CharField('Name', max_length=2048)
     value = models.CharField('Value', max_length=2048)
     description = models.CharField('Description', max_length=4096)
 
 
 class Polygon(models.Model):
+
     class Meta:
         verbose_name = "Polygon"
         verbose_name_plural = "Polygons"
+
     points = models.CharField('Points', max_length=2048)
     description = models.CharField('Description', max_length=4096)
 
 
 class Segment(models.Model):
+
     class Meta:
         verbose_name = "Segment"
         verbose_name_plural = "Segments"
+
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     polygon = models.ForeignKey(Polygon, on_delete=models.CASCADE)
     annotation = models.ForeignKey(Annotation, on_delete=models.CASCADE)
@@ -112,6 +119,7 @@ class Segment(models.Model):
 
 
 class ImageMask(models.Model):
+
     class Meta:
         verbose_name = "Image Mask"
         verbose_name_plural = "Image Masks"
@@ -123,9 +131,11 @@ class ImageMask(models.Model):
 
 
 class ImageTag(models.Model):
+
     class Meta:
         verbose_name = "Image Tag"
         verbose_name_plural = "Image Tags"
+
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     value = models.CharField('Value', max_length=4096)
@@ -134,6 +144,7 @@ class ImageTag(models.Model):
 
 
 class SegmentTag(models.Model):
+
     class Meta:
         verbose_name = "Segment Tag"
         verbose_name_plural = "Segment Tags"
@@ -144,6 +155,8 @@ class SegmentTag(models.Model):
 
 
 class ErrorResponse(models.Model):
+
     class Meta:
         managed = False
+    
     error_message = models.TextField('Error Message')

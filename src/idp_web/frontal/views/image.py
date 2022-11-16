@@ -70,3 +70,9 @@ def image_by_tag(request, tag_id):
         response_data = serializers.serialize('json', [errorResponse])
     return HttpResponse(response_data, content_type='application/json')
 
+
+def image_insert(request):
+    if request.method == 'POST':
+        return HttpResponse(request.data)
+
+    return HttpResponse(request.method)
