@@ -18,6 +18,11 @@ class Image(models.Model):
     the ``__doc__`` attribute. This is also what you'll see if you call
     help() on a module or any other Python object.
     """
+
+    class Meta:
+        verbose_name = "Image"
+        verbose_name_plural = "Images"
+
     directory_path = models.CharField('Directory Path', max_length=2048)
     file_name = models.CharField('File Name', max_length=2048)
     file_type = models.IntegerField()
@@ -37,6 +42,11 @@ class Mask(models.Model):
     the ``__doc__`` attribute. This is also what you'll see if you call
     help() on a module or any other Python object.
     """
+
+    class Meta:
+        verbose_name = "Mask"
+        verbose_name_plural = "Masks"
+
     directory_path = models.CharField('Directory Path', max_length=2048)
     file_name = models.CharField('File Name', max_length=2048)
     file_type = models.IntegerField()
@@ -53,6 +63,12 @@ class Tag(models.Model):
     the ``__doc__`` attribute. This is also what you'll see if you call
     help() on a module or any other Python object.
     """
+
+    class Meta:
+        verbose_name = "Tag"
+        verbose_name_plural = "Tags"
+
+    name = models.CharField('Name', max_length=2048)
     name = models.CharField('Name', max_length=2048)
     description = models.CharField('Description', max_length=4096)
     def __str__(self) -> str:
@@ -60,22 +76,35 @@ class Tag(models.Model):
 
 
 class Annotation(models.Model):
+    class Meta:
+        verbose_name = "Annotation"
+        verbose_name_plural = "Annotations"
+
     name = models.CharField('Name', max_length=2048)
     description = models.CharField('Description', max_length=4096)
     
 
 class Color(models.Model):
+    class Meta:
+        verbose_name = "Color"
+        verbose_name_plural = "Colors"
     name = models.CharField('Name', max_length=2048)
     value = models.CharField('Value', max_length=2048)
     description = models.CharField('Description', max_length=4096)
 
 
 class Polygon(models.Model):
+    class Meta:
+        verbose_name = "Polygon"
+        verbose_name_plural = "Polygons"
     points = models.CharField('Points', max_length=2048)
     description = models.CharField('Description', max_length=4096)
 
 
 class Segment(models.Model):
+    class Meta:
+        verbose_name = "Segment"
+        verbose_name_plural = "Segments"
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     polygon = models.ForeignKey(Polygon, on_delete=models.CASCADE)
     annotation = models.ForeignKey(Annotation, on_delete=models.CASCADE)
@@ -83,6 +112,9 @@ class Segment(models.Model):
 
 
 class ImageMask(models.Model):
+    class Meta:
+        verbose_name = "Image Mask"
+        verbose_name_plural = "Image Masks"
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     mask = models.ForeignKey(Mask, on_delete=models.CASCADE)
 
@@ -91,6 +123,9 @@ class ImageMask(models.Model):
 
 
 class ImageTag(models.Model):
+    class Meta:
+        verbose_name = "Image Tag"
+        verbose_name_plural = "Image Tags"
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     value = models.CharField('Value', max_length=4096)
@@ -99,6 +134,10 @@ class ImageTag(models.Model):
 
 
 class SegmentTag(models.Model):
+    class Meta:
+        verbose_name = "Segment Tag"
+        verbose_name_plural = "Segment Tags"
+
     segment = models.ForeignKey(Segment, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     value = models.CharField('Value', max_length=4096)
