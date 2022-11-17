@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+    URL Manager and Routing Module (Frontal) 
+
+    # To be completed
+"""
+
+
 from django.urls import path
 from .views import image
 from .views import mask
@@ -11,6 +19,7 @@ urlpatterns = [
     path('image/insert', image.image_insert, name='image_insert'),
     path('image/update', image.image_update, name='image_update'),
     path('image/delete', image.image_delete, name='image_delete'),
+    path('image/download/<int:image_id>', image.image_download, name='image_download'),
 
     # Mask Model Routing
     path('mask/', mask.mask_list, name='mask_list'),

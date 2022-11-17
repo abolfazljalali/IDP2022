@@ -1,7 +1,9 @@
-from django.http import HttpResponse, HttpResponseForbidden
+import os
+from django.http import HttpResponse, HttpResponseForbidden, Http404
 from django.shortcuts import render
 from django.template import loader
 from django.core import serializers
+from django.conf import settings
 
 from PIL import Image
 import base64
@@ -151,3 +153,25 @@ def image_delete(request):
         return HttpResponse('Data deleted successfully.')
 
     return HttpResponse(request.method)
+
+
+def image_download(request, image_id):
+    '''
+    Download the image in the database by image_id.
+
+            Parameters:
+                    image_id        (int)   : A bigint positive integer number.
+            Returns:
+                    Model (OperationResult): A serialized dict/json of operation result and downloadable content.
+    '''
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+
+    current_image = models.Image.objects.get(pk=image_id)
+    file_path = os.path.join(current_image.directory_path, current_image.file_name)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="image/tiff")
+            response['Content-Disposition'] = 'inline; filename=' + current_image.file_name.replace(' ', '_').replace(',', '-')
+            return response
+    raise Http404

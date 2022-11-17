@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.template import loader
 from django.core import serializers
 
-from PIL import Image
 import base64
 from io import BytesIO
 
+from PIL import Image
 
 from .. import models
 

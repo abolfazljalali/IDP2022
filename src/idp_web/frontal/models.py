@@ -1,23 +1,40 @@
 # -*- coding: utf-8 -*-
 """Database Model Module 
 
-Notice the comment above the docstring specifying the encoding.
-Docstrings do appear in the bytecode, so you can access this through
-the ``__doc__`` attribute. This is also what you'll see if you call
-help() on a module or any other Python object.
+This whole document represents the models of the frontal application.
+The purpose of this app (frontal) is to create the whole database for
+spectral images that are in nature related to medical information.
+However, this model is generalised in the level that users can store
+different images, and categorize them by assigning different **tags**
+and information to each image.
 """
 
 from django.db import models
 
 
 class Image(models.Model):
-    """Image Model 
-
-    Notice the comment above the docstring specifying the encoding.
-    Docstrings do appear in the bytecode, so you can access this through
-    the ``__doc__`` attribute. This is also what you'll see if you call
-    help() on a module or any other Python object.
     """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
+
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
+
 
     class Meta:
         verbose_name = "Image"
@@ -35,12 +52,26 @@ class Image(models.Model):
 
 
 class Mask(models.Model):
-    """Mask Model 
+    """
+    Mask class contains the general information of mask files plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
-    Notice the comment above the docstring specifying the encoding.
-    Docstrings do appear in the bytecode, so you can access this through
-    the ``__doc__`` attribute. This is also what you'll see if you call
-    help() on a module or any other Python object.
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
     """
 
     class Meta:
@@ -56,12 +87,26 @@ class Mask(models.Model):
 
 
 class Tag(models.Model):
-    """Tag Model 
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
-    Notice the comment above the docstring specifying the encoding.
-    Docstrings do appear in the bytecode, so you can access this through
-    the ``__doc__`` attribute. This is also what you'll see if you call
-    help() on a module or any other Python object.
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
     """
 
     class Meta:
@@ -76,7 +121,27 @@ class Tag(models.Model):
 
 
 class Annotation(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Annotation"
         verbose_name_plural = "Annotations"
@@ -86,7 +151,27 @@ class Annotation(models.Model):
     
 
 class Color(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Color"
         verbose_name_plural = "Colors"
@@ -97,7 +182,27 @@ class Color(models.Model):
 
 
 class Polygon(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Polygon"
         verbose_name_plural = "Polygons"
@@ -107,7 +212,27 @@ class Polygon(models.Model):
 
 
 class Segment(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Segment"
         verbose_name_plural = "Segments"
@@ -119,7 +244,27 @@ class Segment(models.Model):
 
 
 class ImageMask(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Image Mask"
         verbose_name_plural = "Image Masks"
@@ -131,7 +276,27 @@ class ImageMask(models.Model):
 
 
 class ImageTag(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Image Tag"
         verbose_name_plural = "Image Tags"
@@ -144,7 +309,27 @@ class ImageTag(models.Model):
 
 
 class SegmentTag(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         verbose_name = "Segment Tag"
         verbose_name_plural = "Segment Tags"
@@ -155,7 +340,27 @@ class SegmentTag(models.Model):
 
 
 class ErrorResponse(models.Model):
+    """
+    Image class contains the general information of image plus its location
+    in the local machine file system. Using this technique, we do not need to
+    be concerned about the complexity of data handling and large volume files.
 
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
     class Meta:
         managed = False
     
