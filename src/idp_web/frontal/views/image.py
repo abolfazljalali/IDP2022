@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render
 from django.template import loader
 from django.core import serializers
@@ -70,9 +70,84 @@ def image_by_tag(request, tag_id):
         response_data = serializers.serialize('json', [errorResponse])
     return HttpResponse(response_data, content_type='application/json')
 
-
 def image_insert(request):
+    '''
+    Inserts the image path and basic information to the database.
+
+            Parameters:
+                    directory_path  (string): A unix-based string path.
+                    file_name       (string): File name containing the format.
+                    file_type       (int)   : File type or container in form of an integer.
+                                            
+                                            - 0 for tiff.
+                                            - 1 for jpeg.
+                                            - 2 for png.
+
+            Returns:
+                    Model (OperationResult): A serialized dict/json of operation result.
+    '''
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+
     if request.method == 'POST':
-        return HttpResponse(request.data)
+        new_image = models.Image()
+        new_image.directory_path    = request.POST['directory_path']
+        new_image.file_name         = request.POST['file_name']
+        new_image.file_type         = int(request.POST['file_type'])
+        new_image.save()
+        return HttpResponse('Data saved successfully.')
+
+    return HttpResponse(request.method)
+
+def image_update(request):
+    '''
+    Updates the image path and basic information in the database.
+
+            Parameters:
+                    image_id        (int)   : A bigint positive integer number.
+                    directory_path  (string): A unix-based string path.
+                    file_name       (string): File name containing the format.
+                    file_type       (int)   : File type or container in form of an integer.
+                                            
+                                            - 0 for tiff.
+                                            - 1 for jpeg.
+                                            - 2 for png.
+
+            Returns:
+                    Model (OperationResult): A serialized dict/json of operation result.
+    '''
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+
+    if request.method == 'PUT':
+        image_pk = int(request.POST['image_id'])
+        current_image = models.Image.objects.get(pk=image_pk)
+        current_image.directory_path    = request.POST['directory_path']
+        current_image.file_name         = request.POST['file_name']
+        current_image.file_type         = int(request.POST['file_type'])
+        current_image.save()
+        return HttpResponse('Data updated successfully.')
+
+    return HttpResponse(request.method)
+
+
+
+def image_delete(request):
+    '''
+    Deletes the image in the database.
+
+            Parameters:
+                    image_id        (int)   : A bigint positive integer number.
+            Returns:
+                    Model (OperationResult): A serialized dict/json of operation result.
+    '''
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+
+    if request.method == 'DELETE':
+        image_pk = int(request.POST['image_id'])
+        current_image = models.Image.objects.get(pk=image_pk)
+        current_image.delete()
+        return HttpResponse('Data deleted successfully.')
 
     return HttpResponse(request.method)
