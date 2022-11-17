@@ -283,7 +283,7 @@ class ImageTagTestCase(TestCase):
         self.ttc.test_tag_dry(imagetag.tag)
 
         self.assertEqual(imagetag.value, "test")
-        self.assertEqual(str(imagetag), f'{imagetag.tag.name}:{imagetag.value}')
+        self.assertEqual(str(imagetag), f'[{imagetag.image.file_name}] {imagetag.tag.name}:{imagetag.value}')
 
     # Variable type test
     def test_imagetag_vartypes(self, imagetag=None):
