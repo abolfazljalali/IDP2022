@@ -48,7 +48,7 @@ class Image(models.Model):
         '''
             Returns the file_name property of the class as the string form.
         '''
-        return f'{self.file_name}'
+        return f'{self.id}) {self.file_name}'
 
 
 class Mask(models.Model):

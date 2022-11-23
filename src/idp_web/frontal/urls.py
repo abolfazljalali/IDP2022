@@ -12,6 +12,7 @@ from .views import mask
 
 app_name = 'frontal'
 urlpatterns = [
+
     # Image Model Routing
     path('image/', image.image_list, name='image_list'),
     path('image/<int:image_id>/', image.image_by_id, name='image_by_id'),

@@ -98,10 +98,21 @@ share/
 pyvenv.cfg
 src/idp_web/frontal/__pycache__/
 src/idp_web/idp_web/__pycache__/
+
+src/idp_web/frontal/views/__pycache__/
+src/idp_web/frontal/forms/__pycache__/
+
+src/idp_web/frontal/views/__pycache__/*
+src/idp_web/frontal/forms/__pycache__/*
+
+
 src/idp_web/idp_web/migrations/
 src/idp_web/frontal/__pycache__/*
 src/idp_web/idp_web/__pycache__/*
 src/idp_web/idp_web/migrations/*
+src/idp_web/media
+
+
 # Spyder project settings
 .spyderproject
 .spyproject

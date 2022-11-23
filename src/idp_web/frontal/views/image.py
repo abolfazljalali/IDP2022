@@ -4,6 +4,12 @@ from django.shortcuts import render
 from django.template import loader
 from django.core import serializers
 from django.conf import settings
+from django.http import QueryDict
+
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from ..forms.image_upload import ImageUploadForm
+
 
 from PIL import Image
 import base64
@@ -88,18 +94,32 @@ def image_insert(request):
             Returns:
                     Model (OperationResult): A serialized dict/json of operation result.
     '''
+    def handle_uploaded_file(file_full_path, file):
+        with open(file_full_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
     if not request.user.is_authenticated:
+        print(request.user)
         return HttpResponseForbidden()
-
+    
     if request.method == 'POST':
-        new_image = models.Image()
-        new_image.directory_path    = request.POST['directory_path']
-        new_image.file_name         = request.POST['file_name']
-        new_image.file_type         = int(request.POST['file_type'])
-        new_image.save()
-        return HttpResponse('Data saved successfully.')
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            file_full_path = os.path.join(settings.IMAGE_FILE_DIR, request.POST['file_name'])
+            handle_uploaded_file(file_full_path, request.FILES['file'])
+            new_image = models.Image()
+            new_image.directory_path    = settings.MEDIA_ROOT
+            new_image.file_name         = request.POST['file_name']
+            new_image.file_type         = int(request.POST['file_type'])
+            new_image.save()
+            return HttpResponse('NICE!')
+        else:
+            print(form.errors.as_data())
+    else:
+        form = ImageUploadForm()
+    return render(request, 'frontal/image/upload.html', {'form': form})
 
-    return HttpResponse(request.method)
 
 def image_update(request):
     '''
@@ -122,11 +142,12 @@ def image_update(request):
         return HttpResponseForbidden()
 
     if request.method == 'PUT':
-        image_pk = int(request.POST['image_id'])
+        put = QueryDict(request.body)
+        image_pk = int(put['image_id'])
         current_image = models.Image.objects.get(pk=image_pk)
-        current_image.directory_path    = request.POST['directory_path']
-        current_image.file_name         = request.POST['file_name']
-        current_image.file_type         = int(request.POST['file_type'])
+        current_image.directory_path    = put['directory_path']
+        current_image.file_name         = put['file_name']
+        current_image.file_type         = int(put['file_type'])
         current_image.save()
         return HttpResponse('Data updated successfully.')
 
@@ -143,16 +164,20 @@ def image_delete(request):
             Returns:
                     Model (OperationResult): A serialized dict/json of operation result.
     '''
+    print(request.user)
+    
     if not request.user.is_authenticated:
         return HttpResponseForbidden()
 
     if request.method == 'DELETE':
-        image_pk = int(request.POST['image_id'])
+        delete = QueryDict(request.body)
+
+        image_pk = int(delete['image_id'])
         current_image = models.Image.objects.get(pk=image_pk)
         current_image.delete()
         return HttpResponse('Data deleted successfully.')
 
-    return HttpResponse(request.method)
+    return Http404()
 
 
 def image_download(request, image_id):
@@ -175,3 +200,5 @@ def image_download(request, image_id):
             response['Content-Disposition'] = 'inline; filename=' + current_image.file_name.replace(' ', '_').replace(',', '-')
             return response
     raise Http404
+
+
