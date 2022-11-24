@@ -1,5 +1,7 @@
 from django.test import TestCase
+
 from . import models
+
 
 # Create your tests here.
 
@@ -21,7 +23,7 @@ class ImageTestCase(TestCase):
         self.assertEqual(image.directory_path, "test")
         self.assertEqual(image.file_name, "test")
         self.assertEqual(image.file_type, 0)
-        self.assertEqual(str(image), image.file_name)
+        self.assertEqual(str(image), f'{image.id}) {image.file_name}')
 
     # Variable type test
     def test_image_vartypes(self, image=None):
