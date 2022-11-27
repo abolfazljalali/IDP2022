@@ -21,6 +21,7 @@ urlpatterns = [
     path('image/update', image.image_update, name='image_update'),
     path('image/delete', image.image_delete, name='image_delete'),
     path('image/download/<int:image_id>', image.image_download, name='image_download'),
+    path('image/preview/<int:image_id>/<int:page_id>', image.image_preview, name='image_preview'),
 
     # Mask Model Routing
     path('mask/', mask.mask_list, name='mask_list'),

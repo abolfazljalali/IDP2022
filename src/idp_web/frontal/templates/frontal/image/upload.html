@@ -16,19 +16,23 @@
         </style>
     </head>
     <body>
-        {% block content %}
-        <form action="http://127.0.0.1:8000/frontal/image/insert" method="post" enctype="multipart/form-data">
+        {% if message %}
+            <p style="color: green; margin:5% 42.5%;">
+                {{ message }}
+            </p>
+        {% endif %}
+        <form action="{% url 'frontal:image_insert' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div>
+            <div style="margin:12.5% 40%;">
                 <ul>
-                    {% for field in form%}
-                        <li>{{field}}</li>
-                    {% endfor %}
+                    <label for="file_name">File name:</label>
+                    <li>{{ form.file_name }}</li>
+                    <label for="file">File:</label>
+                    <li>{{ form.file }}</li>
                 </ul>
+                <button type="submit">Save</button>
             </div>
-            <button type="submit">Save</button>
         </form>
-        {% endblock %}
     </body>
 </html>
 

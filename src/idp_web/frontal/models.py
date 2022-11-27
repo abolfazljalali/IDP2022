@@ -12,6 +12,31 @@ and information to each image.
 from django.db import models
 
 
+class FileFormat(models.Model):
+    """
+
+
+
+    ...
+
+    Attributes
+    ----------
+
+
+    Methods
+    -------
+        None
+    """
+    class Meta:
+        verbose_name = "File Format"
+        verbose_name_plural = "File Formats"
+
+    code = models.IntegerField(default=-1)
+    value = models.CharField('Value', max_length=4096)
+    def __str__(self) -> str:
+        return f'{self.code}:{self.value}'
+
+
 class Image(models.Model):
     """
     Image class contains the general information of image plus its location
@@ -42,13 +67,50 @@ class Image(models.Model):
 
     directory_path = models.CharField('Directory Path', max_length=2048)
     file_name = models.CharField('File Name', max_length=2048)
-    file_type = models.IntegerField()
+    bands = models.IntegerField()
+    file_type = models.ForeignKey(FileFormat, on_delete=models.CASCADE)
 
     def __str__(self):
         '''
             Returns the file_name property of the class as the string form.
         '''
-        return f'{self.id}) {self.file_name}'
+        return f'{self.pk}) {self.file_name}'
+
+
+class Page(models.Model):
+    """
+    To be implemented.
+
+
+    ...
+
+    Attributes
+    ----------
+    directory_path : str
+        the directory path where the image is stored on the local machine's file system.
+    file_name : str
+        file name stored on the local machine's file system.
+    file_type : int
+        the container or file format code.
+
+    Methods
+    -------
+        None
+    """
+
+
+    class Meta:
+        verbose_name = "Page"
+        verbose_name_plural = "Pages"
+
+    page_number = models.IntegerField()
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+
+    def __str__(self):
+        '''
+            Returns the file_name property of the class as the string form.
+        '''
+        return f'{self.pk}) {self.page_number}'
 
 
 class Mask(models.Model):
@@ -113,7 +175,6 @@ class Tag(models.Model):
         verbose_name = "Tag"
         verbose_name_plural = "Tags"
 
-    name = models.CharField('Name', max_length=2048)
     name = models.CharField('Name', max_length=2048)
     description = models.CharField('Description', max_length=4096)
     def __str__(self) -> str:
@@ -306,6 +367,31 @@ class ImageTag(models.Model):
     value = models.CharField('Value', max_length=4096)
     def __str__(self) -> str:
         return f'[{self.image.file_name}] {self.tag.name}:{self.value}'
+
+class PageTag(models.Model):
+    """
+
+
+
+    ...
+
+    Attributes
+    ----------
+
+
+    Methods
+    -------
+        None
+    """
+    class Meta:
+        verbose_name = "Page Tag"
+        verbose_name_plural = "Page Tags"
+
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    value = models.CharField('Value', max_length=4096)
+    def __str__(self) -> str:
+        return f'[{self.page.image.file_name}] {self.tag.name}:{self.value}'
 
 
 class SegmentTag(models.Model):

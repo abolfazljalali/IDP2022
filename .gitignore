@@ -107,10 +107,12 @@ src/idp_web/frontal/forms/__pycache__/*
 
 
 src/idp_web/idp_web/migrations/
+src/idp_web/frontal/migrations/
 src/idp_web/frontal/__pycache__/*
 src/idp_web/idp_web/__pycache__/*
 src/idp_web/idp_web/migrations/*
-src/idp_web/media
+src/idp_web/media/
+src/idp_web/storage/
 
 
 # Spyder project settings
