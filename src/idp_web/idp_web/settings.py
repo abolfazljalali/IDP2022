@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'media'
+MEDIA_URL = 'media/'
 
 IMAGE_FILE_DIR = os.path.join(BASE_DIR, 'storage', 'images')
 MASK_FILE_DIR = os.path.join(BASE_DIR, 'storage', 'masks')
