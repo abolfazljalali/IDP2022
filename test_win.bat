@@ -1,6 +1,15 @@
 @echo off
 title IDP Group 4 server
-cd src/idp_web
+
+echo:
+echo:
+echo -----------------------------
+echo Source activating the venv...
+echo -----------------------------
+echo:
+
+cd Scripts
+call activate.bat
 
 echo:
 echo:
@@ -10,6 +19,7 @@ echo ------------------------------------------
 echo:
 echo:
 
+cd ../src/idp_web
 python manage.py test
 
 pause
