@@ -30,8 +30,10 @@ ALLOWED_HOSTS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media'
+
 IMAGE_FILE_DIR = os.path.join(BASE_DIR, 'storage', 'images')
 MASK_FILE_DIR = os.path.join(BASE_DIR, 'storage', 'masks')
+
 Path(IMAGE_FILE_DIR).mkdir(parents=True, exist_ok=True)
 Path(MASK_FILE_DIR).mkdir(parents=True, exist_ok=True)
 Path(MEDIA_ROOT).mkdir(parents=True, exist_ok=True)
