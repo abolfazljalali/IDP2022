@@ -29,6 +29,7 @@ In this step, install required libraries using the command mentioned below:
 ```
 pip install django
 pip install pillow
+pip install tifffile
 ```
 #### Step 4:
 
