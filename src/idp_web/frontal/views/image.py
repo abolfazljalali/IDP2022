@@ -189,11 +189,11 @@ def image_insert(request):
                     new_image.save()
                     handle_uploaded_details(tiff_image, new_image)
                     form.clean()
-            except:
+            except Exception as e:
                 if os.path.exists(file_full_path):
                     os.remove(file_full_path)
                     errorResponse = models.ErrorResponse()
-                    errorResponse.error_message = f'Error while storing the information. Uploaded file was removed. Try again!'
+                    errorResponse.error_message = f'Error while storing the information. Uploaded file was removed. Try again! \n{e}'
                     response_data = serializers.serialize('json', [errorResponse], fields=('error_message'))
                 return HttpResponse(response_data, content_type='application/json')
             return render(request, 'frontal/image/upload.html', {'form': form, 'message':'Image was stored successfully.'})
