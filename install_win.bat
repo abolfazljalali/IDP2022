@@ -12,6 +12,26 @@ echo ----------------------------------------------------
 
 echo:
 echo:
+echo -------------------------------
+echo Making a virtual environment...
+echo -------------------------------
+echo:
+
+cd ..
+python -m venv IDP2022-main
+
+echo:
+echo:
+echo -----------------------------
+echo Source activating the venv...
+echo -----------------------------
+echo:
+
+cd IDP2022-main/Scripts
+call activate.bat
+
+echo:
+echo:
 echo --------------------------------
 echo Installing required libraries...
 echo --------------------------------
@@ -19,6 +39,7 @@ echo:
 
 pip install django
 pip install pillow
+pip install tifffile
 
 echo:
 echo:
@@ -27,7 +48,7 @@ echo Making migrations...
 echo ---------------------
 echo:
 
-cd src/idp_web
+cd ../src/idp_web
 python manage.py makemigrations
 python manage.py makemigrations frontal
 python manage.py migrate
