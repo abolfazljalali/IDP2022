@@ -1,5 +1,5 @@
 @echo off
-title IDP Group 4 server
+title IDP Group 4 automated testing
 
 echo:
 echo:
