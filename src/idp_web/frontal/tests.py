@@ -6,11 +6,40 @@ from . import models
 # Create your tests here.
 
 
+# Class for testing FileFormat model
+class FileFormatTestCase(TestCase):
+    # Function to create a testing file format
+    def get_test_file_format(self):
+        return models.FileFormat.objects.create(code=0, value="test")
+
+    # Testing set up function
+    def setUp(self):
+        self.get_test_file_format()
+
+    # Dry test
+    def test_file_format_dry(self, file_format=None):
+        if file_format is None:
+            file_format = models.FileFormat.objects.get(code=0)
+        self.assertEqual(file_format.code, 0)
+        self.assertEqual(file_format.value, "test")
+        self.assertEqual(str(file_format), f'{file_format.code}:{file_format.value}')
+
+    #Variable type test
+    def test_file_format_vartypes(self, file_format=None):
+        if file_format is None:
+            file_format = models.FileFormat.objects.get(code=0)
+        self.assertIsInstance(file_format.code, int)
+        self.assertIsInstance(file_format.value, str)
+
+
 # Class for testing Image model
 class ImageTestCase(TestCase):
+    fftc = FileFormatTestCase()
+
     # Function to create a testing image
     def get_test_image(self):
-        return models.Image.objects.create(directory_path="test", file_name="test", file_type=0)
+        return models.Image.objects.create(directory_path="test", file_name="test", bands=0,
+                                           file_type=self.fftc.get_test_file_format())
 
     # Testing set up function
     def setUp(self):
@@ -22,8 +51,10 @@ class ImageTestCase(TestCase):
             image = models.Image.objects.get(directory_path="test")
         self.assertEqual(image.directory_path, "test")
         self.assertEqual(image.file_name, "test")
-        self.assertEqual(image.file_type, 0)
-        self.assertEqual(str(image), f'{image.id}) {image.file_name}')
+        self.assertEqual(image.bands, 0)
+        self.assertEqual(str(image), f'{image.pk}) {image.file_name}')
+
+        self.fftc.test_file_format_dry(file_format=image.file_type)
 
     # Variable type test
     def test_image_vartypes(self, image=None):
@@ -31,7 +62,10 @@ class ImageTestCase(TestCase):
             image = models.Image.objects.get(directory_path="test")
         self.assertIsInstance(image.directory_path, str)
         self.assertIsInstance(image.file_name, str)
-        self.assertIsInstance(image.file_type, int)
+        self.assertIsInstance(image.bands, int)
+        self.assertIsInstance(image.file_type, models.FileFormat)
+
+        self.fftc.test_file_format_vartypes(file_format=image.file_type)
 
 
 # Class for testing Mask model
