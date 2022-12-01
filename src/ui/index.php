@@ -13,6 +13,7 @@ include_once "config.php";
     <link href="admin/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="admin/assets/js/loader.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -64,18 +65,18 @@ include_once "config.php";
                       // output data of each row
                       while($row = mysqli_fetch_assoc($result)) {
                     ?>
-                    <div class="col-xl-4 col-lg-6 col-md-6 mb-4" title="<?php echo $row["width"] ?> x <?php echo $row["height"] ?>, Size: <?php echo $row["filesize"] ?> kb">
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-2" title="<?php echo $row["width"] ?> x <?php echo $row["height"] ?>, Size: <?php echo $row["filesize"] ?> kb">
 
                         <div class="card b-l-card-1 h-100" style="border: none;-webkit-box-shadow: 0 0.1px 0px rgba(0, 0, 0, 0.002), 0 0.2px 0px rgba(0, 0, 0, 0.003), 0 0.4px 0px rgba(0, 0, 0, 0.004), 0 0.6px 0px rgba(0, 0, 0, 0.004), 0 0.9px 0px rgba(0, 0, 0, 0.005), 0 1.2px 0px rgba(0, 0, 0, 0.006), 0 1.8px 0px rgba(0, 0, 0, 0.006), 0 2.6px 0px rgba(0, 0, 0, 0.007), 0 3.9px 0px rgba(0, 0, 0, 0.008), 0 7px 0px rgba(0, 0, 0, 0.01); -moz-box-shadow: 0 0.1px 0px rgba(0, 0, 0, 0.002), 0 0.2px 0px rgba(0, 0, 0, 0.003), 0 0.4px 0px rgba(0, 0, 0, 0.004), 0 0.6px 0px rgba(0, 0, 0, 0.004), 0 0.9px 0px rgba(0, 0, 0, 0.005), 0 1.2px 0px rgba(0, 0, 0, 0.006), 0 1.8px 0px rgba(0, 0, 0, 0.006), 0 2.6px 0px rgba(0, 0, 0, 0.007), 0 3.9px 0px rgba(0, 0, 0, 0.008), 0 7px 0px rgba(0, 0, 0, 0.01); box-shadow: 0 0.1px 0px rgba(0, 0, 0, 0.002), 0 0.2px 0px rgba(0, 0, 0, 0.003), 0 0.4px 0px rgba(0, 0, 0, 0.004), 0 0.6px 0px rgba(0, 0, 0, 0.004), 0 0.9px 0px rgba(0, 0, 0, 0.005), 0 1.2px 0px rgba(0, 0, 0, 0.006), 0 1.8px 0px rgba(0, 0, 0, 0.006), 0 2.6px 0px rgba(0, 0, 0, 0.007), 0 3.9px 0px rgba(0, 0, 0, 0.008), 0 7px 0px rgba(0, 0, 0, 0.01); ">
-                            <h5 class="card-title mt-2"><?php echo $row["title"] ?></h5>
+                            
                             <div id='pnt<?php echo $row["id"] ?>' >
                                 <img id='my_img<?php echo $row["id"] ?>' class="card-img-top" src="images/<?php echo $row["img"] ?>" alt="">
                             </div>
                             <div class="card-body">
-                                <strong class="card-category"><?php echo $row["width"] ?> x <?php echo $row["height"] ?>, Size: <?php echo $row["filesize"] ?> kb </strong>
-                               
-                                <p class="card-text meta-info meta-time mb-2"><small class="">White picture <a class="btn btn-success btn-sm" target="_blank" href="img.php?img=<?php echo $row["img"] ?>">download</a></small></p>
-                                <p class="card-text mb-4"><?php echo $row["description"] ?></p>
+                                <strong class="card-category"><i class="fa fa-info-circle"></i> <?php echo $row["width"] ?> x <?php echo $row["height"] ?>, Size: <?php echo $row["filesize"] ?> kb </strong>
+                                <h5 class="card-title mt-2"><?php echo $row["title"] ?></h5>
+                                <p class="card-text meta-info meta-time mb-2"><i class="fa fa-download"></i> White picture <a class="btn btn-success btn-sm" target="_blank" href="img.php?img=<?php echo $row["img"] ?>" style="padding: 2px !important">Download</a></p>
+                                <p class="card-text"><?php echo $row["description"] ?></p>
                             </div>
                         </div>
                     </div>
@@ -87,24 +88,10 @@ include_once "config.php";
                     ?>
                 </div>
 
-                <script>
-                    function printDiv(id,img) {
-                        var element = document.getElementById("my_img"+id);
-                        element.classList.add("card-img-black");
-                        var divContents = document.getElementById("pnt"+id).innerHTML;
-                        var a = window.open('', '', 'height=500, width=500');
-                        a.document.write('<html>');
-                        a.document.write('<body ><img style="-webkit-filter: grayscale(100%);filter: grayscale(100%);" id="my_img7" class="card-img-top" src="images/'+img+'" alt="">');
-                        // a.document.write(divContents);
-                        a.document.write('</body></html>');
-                        a.document.close();
-                        a.print();
-                    }
-                </script>
             </div>
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
-                    <p class="">Copyright © 2021 <a target="_blank" href="#"></a>, All rights reserved.</p>
+                    <p class="">Copyright © IDP - 2022 <a target="_blank" href="#"></a>, All rights reserved.</p>
                 </div>
                 <div class="footer-section f-section-2">
                     <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
