@@ -19,7 +19,7 @@ The installer will ask you to create credentials for super user - create them ca
 6. Navigate to Frontal / File Formats model
 7. If the model is empty, add two objects: "tif" and ".tif"
 8. In browser, navigate to http://localhost:8000/frontal/image/insert
-9. Insert some images
+9. Insert some images - put .tif in the name of the image and do not use other dots in the name
 10. Run start_ui_win.bat
 
 You can navigate through UI in PHP at http://localhost:3000/
