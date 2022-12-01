@@ -18,7 +18,7 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
-print("Connecting to API...")
+print("Connecting to API...\n")
 username = input("Enter Django username: ")
 password = getpass("Enter Django password: ")
 url = '127.0.0.1:8000'
@@ -40,7 +40,7 @@ header = {'X-CSRFToken': token}
 req = session.get('http://' + url + '/frontal/image/', headers=header)
 data = req.json()
 
-print("Clearing existing files...")
+print("\nClearing existing files...")
 for f in os.listdir(destination):
     os.remove(os.path.join(destination, f))
 cursor.execute("TRUNCATE images")
