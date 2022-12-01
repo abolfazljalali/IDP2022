@@ -40,6 +40,9 @@ echo:
 pip install django
 pip install pillow
 pip install tifffile
+pip install requests
+pip install mysql-connector-python
+pip install opencv-python
 
 echo:
 echo:
@@ -67,10 +70,11 @@ echo -------------------------------
 python manage.py createsuperuser
 
 echo:
-echo ----------------------------------
+echo ------------------------------------------------
 echo Installation complete
-echo Run the server with start_win.bat
-echo ----------------------------------
+echo Run the django server with start_django_win.bat
+echo Run the UI with start_ui_win.bat
+echo ------------------------------------------------
 echo:
 
 pause
