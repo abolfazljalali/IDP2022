@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Convert HTML To Image</title>
+    <title>Spectral image</title>
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
     </script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js">
@@ -20,7 +20,10 @@
     <div id = "htmlContent">
     	<div id="output"> </div>
     </div>
-    <a id="download">Download</a>
+    <a id="download" style="text-decoration: none;
+    background: #00c316;
+    color: #fff;
+    padding: 0 5px;">Download</a>
 
 
     <script type="text/javascript">
