@@ -1,0 +1,26 @@
+Video tutorial available at https://www.youtube.com/watch?v=QYin03uuukY
+
+Prerequisites:
+1. Python 3.10.8 in PATH - https://www.python.org/downloads/release/python-3108/
+2. MySQL server with database "image_gallery" - upload /src/ui/image_gallery.sql into it
+3. PHP interpreter in PATH
+
+XAMPP is recommended for both MySQL hosting and built-in PHP interpreter - https://www.apachefriends.org/
+If you install XAMPP, add XAMPP's PHP interpreter to PATH ! (look at video)
+
+
+Steps:
+1. Run install_win.bat to initialize venv, install Python libraries and initialize Django
+The installer will ask you to create credentials for super user - create them carefully!
+2. Run test_win.bat to run automated tests (optional)
+3. Run start_django_win.bat to start the Django server
+4. Open your browser and navigate to http://localhost:8000/admin
+5. Authenticate with credentials you have created during installation
+6. Navigate to Frontal / File Formats model
+7. If the model is empty, add two objects: "tif" and ".tif"
+8. In browser, navigate to http://localhost:8000/frontal/image/insert
+9. Insert some images
+10. Run start_ui_win.bat
+
+You can navigate through UI in PHP at http://localhost:3000/
+You can navigate through API in Django at http://localhost:8000/frontal/
